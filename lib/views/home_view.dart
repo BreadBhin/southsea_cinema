@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Welcome to $appTitle',
+                'Welcome to $appTitle, where all your dreams come true!',
                 style: TextStyle(
                   color: cinemaFontWhite,
                   fontSize: 22,
