@@ -10,6 +10,7 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
+  bool _orderConfirmed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +42,16 @@ class _MovieListingState extends State<MovieListing> {
               ],
             ),
             SizedBox(height: 12),
-            const Text(
-              'Basically Nazis get fucked up.',
+            Text(
+              'Basically Nazis get fucked up.'
+              '${_orderConfirmed ? ' You are going to see the movie!' : ''}',
               style: TextStyle(
                 fontSize: 16,
                 height: 1.5,
-                color: Color.fromARGB(221, 255, 255, 255),
+                color: cinemaFontWhite,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 60),
             const Text(
               'Number of tickets',
               style: TextStyle(
@@ -57,12 +59,13 @@ class _MovieListingState extends State<MovieListing> {
                 color: cinemaBrand,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             DropdownMenu<int>(
               initialSelection: 1,
               onSelected: (int? value) {
                 if (value != null) {
                   setState(() {
+                    
                   });
                 }
               },
@@ -77,6 +80,13 @@ class _MovieListingState extends State<MovieListing> {
           ],
         ),
       ),
-    );
+    floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _orderConfirmed = true;
+          });
+        },
+
+    ));
   }
 }
