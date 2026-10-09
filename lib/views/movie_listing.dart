@@ -10,7 +10,6 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
-  int _ticketQuantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,6 @@ class _MovieListingState extends State<MovieListing> {
               onSelected: (int? value) {
                 if (value != null) {
                   setState(() {
-                    _ticketQuantity = value;
                   });
                 }
               },
