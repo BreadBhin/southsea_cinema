@@ -80,13 +80,14 @@ class _MovieListingState extends State<MovieListing> {
           ],
         ),
       ),
-    floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           setState(() {
             _orderConfirmed = true;
           });
         },
-
-    ));
+        label: const Text('BOOK NOW!'),
+      ),
+    );
   }
 }
