@@ -10,7 +10,8 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
-  bool _orderConfirmed = false;
+  final String _orderConfirmed = 'You are going to see the movie!';
+  bool _orderButtonPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +44,9 @@ class _MovieListingState extends State<MovieListing> {
             ),
             SizedBox(height: 12),
             Text(
-              'Basically Nazis get fucked up.'
-              '${_orderConfirmed ? ' You are going to see the movie!' : ''}',
+              _orderButtonPressed
+                  ? 'Basically Nazis get fucked up. $_orderConfirmed'
+                  : 'Basically Nazis get fucked up. ',
               style: TextStyle(
                 fontSize: 16,
                 height: 1.5,
@@ -83,7 +85,7 @@ class _MovieListingState extends State<MovieListing> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           setState(() {
-            _orderConfirmed = true;
+            _orderButtonPressed = true;
           });
         },
         label: const Text('BOOK NOW!'),
