@@ -40,10 +40,7 @@ class _OrderScreenState extends State<OrderScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OrderItemDisplay(
-              _quantity,
-              widget.movie.title,
-            ),
+            
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -65,4 +62,5 @@ class _OrderScreenState extends State<OrderScreen> {
     );
   }
 }
+
 
