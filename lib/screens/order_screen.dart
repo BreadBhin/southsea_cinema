@@ -63,4 +63,14 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 }
 
+  class OrderItemDisplay extends StatelessWidget {
+  final int quantity;
+  final String itemType;
 
+  const OrderItemDisplay(this.quantity, this.itemType, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('$quantity $itemType sandwich(es): ${'Mov' * quantity}');
+  }
+  }
