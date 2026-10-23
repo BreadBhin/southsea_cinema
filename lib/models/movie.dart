@@ -1,21 +1,20 @@
 class Movie {
-	final String id;
+	final int id;
 	final String title;
-	final String synopsis;
+	final String description;
 	final String ageRating;
-	final int runtime;
-	final String screeningTime;
-	final double ticketPrice;
-	final String posterImagePath;
+	final double price;
+	final String imagePath;
 
 	const Movie({
 		required this.id,
 		required this.title,
-		required this.synopsis,
+		required this.description,
 		required this.ageRating,
-		required this.runtime,
-		required this.screeningTime,
-		required this.ticketPrice,
-		required this.posterImagePath,
+		required this.price,
+		required this.imagePath,
 	});
+
+
+
 }
