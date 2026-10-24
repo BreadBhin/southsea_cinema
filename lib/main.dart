@@ -1,4 +1,4 @@
-import 'package:southsea_cinema/screens/listings_screen.dart';
+import 'package:southsea_cinema/screens/home_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Southsea Cinema',
-      home: ListingsScreen(),
+      home: HomeView(),
     );
   }
 }

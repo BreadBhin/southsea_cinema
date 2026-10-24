@@ -3,8 +3,8 @@ import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/repositories/movie_repositories.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 
-class ListingsScreen extends StatelessWidget {
-  const ListingsScreen ({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override 
   Widget build(BuildContext context){
