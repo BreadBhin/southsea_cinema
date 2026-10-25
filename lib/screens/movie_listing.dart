@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/movie_repositories.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  const MovieListing({super.key, required this.movieId});
+
+  final String movieId;
 
   @override
   State<MovieListing> createState() => _MovieListingState();
 }
 
 class _MovieListingState extends State<MovieListing> {
-  final String _orderConfirmed = 'You are going to see the movie!';
-  bool _orderButtonPressed = false;
+  final MovieRepositories _repository = MovieRepositories();
+  int _ticketCount = 1;
+  bool _orderConfirmed = false;
 
   @override
   Widget build(BuildContext context) {
+    final Movie? movie = _repository.getMovieById(widget.movieId);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle, style: cinemaHeaderStyle),
@@ -23,72 +30,101 @@ class _MovieListingState extends State<MovieListing> {
         elevation: 0,
       ),
       drawer: const NavDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Inglorious Bastards',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: cinemaBrand,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Text(
-              _orderButtonPressed
-                  ? 'Basically Nazis get fucked up. $_orderConfirmed'
-                  : 'Basically Nazis get fucked up. ',
-              style: TextStyle(
-                fontSize: 16,
-                height: 1.5,
-                color: cinemaFontWhite,
+      body: movie == null
+          ? const Center(
+              child: Text(
+                'Movie not found.',
+                style: TextStyle(color: cinemaFontBlack),
               ),
-            ),
-            const SizedBox(height: 60),
-            const Text(
-              'Number of tickets',
-              style: TextStyle(
-                fontSize: 16,
-                color: cinemaBrand,
-              ),
-            ),
-            const SizedBox(height: 10),
-            DropdownMenu<int>(
-              initialSelection: 1,
-              onSelected: (int? value) {
-                if (value != null) {
-                  setState(() {
-                    
-                  });
-                }
+            )
+          : _buildMovieDetails(movie),
+      floatingActionButton: movie == null
+          ? null
+          : FloatingActionButton.extended(
+              onPressed: () {
+                setState(() {
+                  _orderConfirmed = true;
+                });
               },
-              dropdownMenuEntries: List.generate(
-                5,
-                (index) => DropdownMenuEntry<int>(
-                  value: index + 1,
-                  label: '${index + 1} ${index == 0 ? 'ticket' : 'tickets'}',
-                ),
+              label: const Text('BOOK NOW!'),
+            ),
+    );
+  }
+
+  Widget _buildMovieDetails(Movie movie) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              movie.imagePath,
+              width: 300,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            movie.title,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: cinemaBrand,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            movie.description,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              color: cinemaFontBlack,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Age rating: ${movie.ageRating}',
+            style: const TextStyle(fontSize: 16, color: cinemaFontBlack),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Price per ticket: ${movie.formattedPrice}',
+            style: const TextStyle(fontSize: 16, color: cinemaFontBlack),
+          ),
+          const SizedBox(height: 32),
+          const Text(
+            'Number of tickets',
+            style: TextStyle(fontSize: 16, color: cinemaBrand),
+          ),
+          const SizedBox(height: 10),
+          DropdownMenu<int>(
+            initialSelection: _ticketCount,
+            onSelected: (int? value) {
+              if (value != null) {
+                setState(() {
+                  _ticketCount = value;
+                  _orderConfirmed = false;
+                });
+              }
+            },
+            dropdownMenuEntries: List.generate(
+              5,
+              (index) => DropdownMenuEntry<int>(
+                value: index + 1,
+                label: '${index + 1} ${index == 0 ? 'ticket' : 'tickets'}',
               ),
+            ),
+          ),
+          if (_orderConfirmed) ...[
+            const SizedBox(height: 24),
+            Text(
+              'You are going to see ${movie.title}!',
+              style: const TextStyle(color: cinemaFontBlack, fontSize: 16),
             ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          setState(() {
-            _orderButtonPressed = true;
-          });
-        },
-        label: const Text('BOOK NOW!'),
+        ],
       ),
     );
   }

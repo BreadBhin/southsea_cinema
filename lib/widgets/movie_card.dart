@@ -78,7 +78,7 @@ class MovieCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MovieListing();
+                          return MovieListing(movieId: movie.id);
                         },
                       ),
                     );

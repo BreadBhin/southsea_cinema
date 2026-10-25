@@ -8,8 +8,9 @@ const Color cinemaBrandDark = Color.fromARGB(255, 155, 63, 217);
 
 const Color cinemaBackground = Color.fromARGB(255, 35, 27, 40);
 const Color cinemaFontWhite = Color(0xFFFFFFFF);
+const Color cinemaFontBlack = Color.fromARGB(255, 0, 0, 0);
 const Color cinemaFontMuted = Color.fromARGB(255, 153, 138, 160);
-const Color cinemaSurface = Color.fromARGB(255, 46, 36, 54);
+const Color cinemaSurface = Color.fromARGB(255, 57, 24, 79);
 
 const TextStyle cinemaHeaderStyle = TextStyle(
   color: cinemaFontWhite,
