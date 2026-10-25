@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movie Listings'),
+        title: const Text('Southsea Cinema - Movies'),
       ),
       body: ListView.builder(
         itemCount: movies.length,
